@@ -59,11 +59,6 @@ endif()
 
 include_directories(${catkin_INCLUDE_DIRS})
 
-generate_messages(
- DEPENDENCIES
- geometry_msgs
-)
-
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 find_package(Eigen3)
 include_directories(
@@ -88,6 +83,8 @@ message(STATUS "===== OpenCV include path: ${OpenCV_INCLUDE_DIRS} =====")
 
 add_executable(r3live_LiDAR_front_end src/loam/LiDAR_front_end.cpp)
 target_link_libraries(r3live_LiDAR_front_end ${catkin_LIBRARIES} ${PCL_LIBRARIES})
+add_dependencies(r3live_LiDAR_front_end ${catkin_EXPORTED_TARGETS})
+
 if(Ceres_FOUND)
   message(STATUS "===== Find ceres, Version ${Ceres_VERSION} =====")  
   include_directories(${CERES_INCLUDE_DIRS})
